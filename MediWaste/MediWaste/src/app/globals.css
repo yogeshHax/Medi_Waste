@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: "Inter", system-ui, sans-serif;
+    --medical-50: #f0f7f4;
+    --medical-900: #233b2b;
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-slate-800;
+  }
+  body {
+    @apply bg-obsidian-950 text-slate-100 antialiased;
+    background:
+      radial-gradient(1200px 800px at 70% -10%, rgba(0, 240, 255, 0.07), transparent 60%),
+      radial-gradient(1000px 700px at 10% 110%, rgba(0, 255, 157, 0.05), transparent 60%),
+      linear-gradient(180deg, #040911 0%, #071320 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Translucent dark glass surface */
+  .glass {
+    @apply bg-slate-900/50 backdrop-blur-md border border-cyan-500/30 rounded-xl;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.45);
+  }
+  /* Softer variant for dense grids */
+  .glass-soft {
+    @apply bg-slate-900/40 backdrop-blur-sm border border-cyan-500/20 rounded-xl;
+  }
+  /* Bracketed monospace button text */
+  .brackets::before { content: "["; opacity: 0.7; }
+  .brackets::after { content: "]"; opacity: 0.7; }
+  /* Fine vertical scanlines over hero elements */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(0, 240, 255, 0.04) 0px,
+      rgba(0, 240, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  }
+}
+
+/* Smooth scroll & selection */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.25);
+}
+
+/* Focus ring */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-cyan-400 ring-1 ring-cyan-400/30;
+}
+
+/* Scrollbar (dark) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #071320;
+}
+::-webkit-scrollbar-thumb {
+  background: #16324a;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1f4462;
+}
+
+/* Reduced motion: stop continuous glow sweeps / pulses */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Dark-theme switchover: many existing pages use light utility classes.
+ * Remap them here so the whole app reads as one dark cyber system while the
+ * per-page markup inherits the theme incrementally.
+ * --------------------------------------------------------------------------- */
+.bg-white { background-color: rgba(11, 27, 45, 0.55); }
+.bg-slate-50 { background-color: rgba(11, 27, 45, 0.45); }
+.bg-slate-100 { background-color: rgba(16, 36, 58, 0.7); }
+.bg-red-50 { background-color: rgba(16, 36, 58, 0.7); }
+.hover\:bg-slate-100:hover { background-color: rgba(16, 36, 58, 0.9); }
+.hover\:bg-slate-50:hover, .hover\:bg-slate-200:hover { background-color: rgba(16, 36, 58, 0.9); }
+.text-slate-900, .text-gray-900 { color: #e2e8f0; }
+.text-slate-800, .text-slate-700 { color: #cbd5e1; }
+.text-slate-600 { color: #94a3b8; }
+.text-slate-500, .text-slate-400 { color: #64748b; }
+.border-slate-300, .border-slate-200, .border-slate-100 { border-color: rgba(56, 89, 120, 0.35); }
+.bg-medical-900 { background-color: #0b1b2d; }
